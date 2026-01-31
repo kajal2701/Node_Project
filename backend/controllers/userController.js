@@ -38,3 +38,15 @@ export const deleteUser = (req, res) => {
     res.json({ message: "User deleted successfully" });
   });
 };
+
+// update user
+
+export const updateUser = (req, res) => {
+  const { id, name, email } = req.body;
+  const sql = "UPDATE users set name=?, email=? where id=? ";
+  db.query(sql, [name, email, id], (err, result) => {
+    console.log(result, err);
+    if (err) return res.status(500).json(err);
+    res.json({ message: "User update successfully" });
+  });
+};
